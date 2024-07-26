@@ -18,8 +18,6 @@ if not SECRET_KEY:
 DEBUG = env.bool('DEBUG', default=False)  # Handle DEBUG appropriately
 
 
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 
@@ -47,6 +45,9 @@ INSTALLED_APPS = [
     'Accounts.apps.AccountsConfig',
     'Forms.apps.FormsConfig',
     'Feedbacks.apps.FeedbacksConfig',
+    'rest_framework',
+
+
 
 ]
 
