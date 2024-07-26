@@ -29,6 +29,7 @@ class QuestionCreateView(APIView):
         Create a new question
     """
     serializer_class = QuestionSerializer
+    # permission_classes = [IsAuthenticated]
     def post(self,request):
         srz_data = QuestionSerializer(data=request.POST)
         if srz_data.is_valid():
@@ -40,7 +41,7 @@ class QuestionUpdateView(APIView):
     """
         Update a question
     """
-    permission_classes = [IsOwnerOrReadOnly]
+    # permission_classes = [IsOwnerOrReadOnly]
     serializer_class = QuestionSerializer
     def put(self,request,pk):
         question = Question.objects.get(pk=pk)
@@ -55,7 +56,7 @@ class QuestionDeleteView(APIView):
     """
         Deleting a question
     """
-    permission_classes = [IsOwnerOrReadOnly]
+    # permission_classes = [IsOwnerOrReadOnly]
     serializer_class = QuestionSerializer
     def delete(self,request,pk):
         question = Question.objects.get(pk=pk)
@@ -63,6 +64,9 @@ class QuestionDeleteView(APIView):
         return Response({'message':'question deleted'})
 
 class AnswerListView(APIView):
+    """
+        Listing all answers
+    """
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
     serializer_class = AnswerSerializer
 
@@ -88,7 +92,7 @@ class AnswerUpdateView(APIView):
     """
         Update a answer
     """
-    permission_classes = [IsOwnerOrReadOnly]
+    # permission_classes = [IsOwnerOrReadOnly]
     serializer_class = AnswerSerializer
     def put(self,request,pk):
         answer = Answer.objects.get(pk=pk)
@@ -103,7 +107,7 @@ class AnswerDeleteView(APIView):
     """
         Deleting an answer
     """
-    permission_classes = [IsOwnerOrReadOnly]
+    # permission_classes = [IsOwnerOrReadOnly]
     serializer_class = AnswerSerializer
 
     def delete(self, request, pk):
