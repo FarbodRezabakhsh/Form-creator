@@ -8,3 +8,10 @@ djangorestframework
 psycopg2-binary
 pymysql
 djangorestframework
+
+# Third party modules
+Markdown
+django-filter
+drf-yasg[validation]
+djangorestframework-simplejwt
+djoser
