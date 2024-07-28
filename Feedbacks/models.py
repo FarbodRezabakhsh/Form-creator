@@ -16,6 +16,7 @@ class Question(models.Model):
     page = models.IntegerField(default=0)
     list_of_select = models.JSONField(blank=True, null=True)
 
+
     def __str__(self):
         return self.body
 
