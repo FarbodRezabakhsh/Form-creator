@@ -1,39 +1,21 @@
 from pathlib import Path
 import os
 import environ
-import pymysql
-pymysql.install_as_MySQLdb()
+from dotenv import load_dotenv
 
+# Load environment variables from .env file
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Retrieve the secret key
-SECRET_KEY = env('SECRET_KEY', default=None)  # or provide a default value
-
+SECRET_KEY = env('SECRET_KEY', default=None)
 if not SECRET_KEY:
     raise ValueError("The SECRET_KEY environment variable is not set!")
 
-DEBUG = env.bool('DEBUG', default=False)  # Handle DEBUG appropriately
+DEBUG = env.bool('DEBUG', default=False)
 
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
-
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
+ALLOWED_HOSTS = ['127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -46,9 +28,6 @@ INSTALLED_APPS = [
     'Forms.apps.FormsConfig',
     'Feedbacks.apps.FeedbacksConfig',
     'rest_framework',
-
-
-
 ]
 
 MIDDLEWARE = [
@@ -81,26 +60,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Form_creator.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-# Database settings
-
 DATABASES = {
     'default': {
-        'ENGINE': env('DATABASE_ENGINE'),
+        'ENGINE': env('DATABASE_ENGINE', default='django.db.backends.postgresql'),
         'NAME': env('DATABASE_NAME'),
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASSWORD'),
-        'HOST': env('DATABASE_HOST'),
-        'PORT': env('DATABASE_PORT'),
+        'HOST': env('DATABASE_HOST', default='localhost'),
+        'PORT': env('DATABASE_PORT', default='5432'),
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -117,10 +86,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -129,13 +94,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
