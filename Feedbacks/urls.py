@@ -1,11 +1,10 @@
 from django.urls import path,include
 from rest_framework.routers import DefaultRouter
-from .views import QuestionViewSet,AnswerViewSet
-
-router = DefaultRouter()
-router.register(r'questions',QuestionViewSet)
-router.register(r'answers',AnswerViewSet)
+from . import views
 
 urlpatterns = [
-    path('',include(router.urls))
+    path('questions/',views.QuestionListView.as_view(),name='question'),
+    path('question/',views.QuestionCreateView.as_view(),name='question_create'),
+    path('question/update/<int:pk>/',views.QuestionUpdateView.as_view(),name='question_update'),
+    path('question/delete/<int:pk>/',views.QuestionDeleteView.as_view(),name='question_delete'),
 ]
