@@ -8,7 +8,7 @@ class Question(models.Model):
     CHOICES = [
         ('survey','Survey'),
         ('quiz','Quiz'),
-        ('poll','Poll'),
+        ('poll','Poll')
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='questions')
     form = models.ForeignKey(Form, on_delete=models.CASCADE)

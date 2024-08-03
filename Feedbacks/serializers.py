@@ -7,7 +7,6 @@ class QuestionSerializer(serializers.ModelSerializer):
     user = UserEmailNameSerializer(read_only=True)
     form = FormTitleRelatedField(read_only=True)
 
-
     class Meta:
         model = Question
         fields = '__all__'
