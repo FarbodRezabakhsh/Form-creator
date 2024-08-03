@@ -10,6 +10,7 @@ class Question(models.Model):
         ('quiz','Quiz'),
         ('poll','Poll'),
     ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='questions')
     form = models.ForeignKey(Form, on_delete=models.CASCADE)
     question_type = models.CharField(max_length=255,choices=CHOICES)
     title = models.CharField(max_length=100)
