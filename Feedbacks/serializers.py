@@ -1,8 +1,12 @@
 from rest_framework import serializers
 from .models import Answer,Question
+# from .custom_relation import UserEmailNameSerializer
+from django.contrib.auth.models import User
 
 class QuestionSerializer(serializers.ModelSerializer):
     answers = serializers.SerializerMethodField()
+    # user = serializers.StringRelatedField(read_only=True)
+
     class Meta:
         model = Question
         fields = '__all__'
