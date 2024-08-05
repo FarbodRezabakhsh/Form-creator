@@ -7,6 +7,7 @@ from rest_framework import viewsets
 from .serializers import QuestionSerializer,AnswerSerializer
 from rest_framework import status
 from rest_framework.throttling import AnonRateThrottle,UserRateThrottle
+from permissions import IsOwnerOrReadOnly
 
 # Create your views here.
 
@@ -26,8 +27,10 @@ class QuestionCreateView(APIView):
         return Response(data=srz_data.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class QuestionUpdateView(APIView):
+    permission_classes = [IsOwnerOrReadOnly]
     def put(self,request,pk):
         question = Question.objects.get(pk=pk)
+        self.check_object_permissions(request,question)
         srz_data = QuestionSerializer(instance=question,data=request.POST,partial=True)
         if srz_data.is_valid():
             srz_data.save()
@@ -35,6 +38,7 @@ class QuestionUpdateView(APIView):
         return Response(srz_data.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class QuestionDeleteView(APIView):
+    permission_classes = [IsOwnerOrReadOnly]
     def delete(self,request,pk):
         question = Question.objects.get(pk=pk)
         question.delete()
