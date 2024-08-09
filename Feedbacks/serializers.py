@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class QuestionSerializer(serializers.ModelSerializer):
     answers = serializers.SerializerMethodField()
-    # user = serializers.StringRelatedField(read_only=True)
+    # user = UserEmailNameSerializer(read_only=True)
 
     class Meta:
         model = Question
