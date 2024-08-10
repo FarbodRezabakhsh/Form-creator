@@ -9,6 +9,7 @@ from rest_framework import status
 from rest_framework.throttling import AnonRateThrottle,UserRateThrottle
 from permissions import IsOwnerOrReadOnly
 
+
 # Create your views here.
 
 class QuestionListView(APIView):
@@ -17,6 +18,7 @@ class QuestionListView(APIView):
     """
     throttle_classes = [AnonRateThrottle,UserRateThrottle]
     serializer_class = QuestionSerializer
+
     def get(self,request):
         question = Question.objects.all()
         srz_data = QuestionSerializer(instance=question,many=True)
