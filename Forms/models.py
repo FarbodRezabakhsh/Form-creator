@@ -23,3 +23,6 @@ class Form(models.Model):
 
     def __str__(self):
         return self.description[:10]
+
+    def get_snippet(self):
+        return self.description[0:5]

@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     'Forms.apps.FormsConfig',
     'Feedbacks.apps.FeedbacksConfig',
     'rest_framework',
+    'drf_yasg',
+    'djoser',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -101,6 +104,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'anon': '5/minute',
-        'user': '1000/day'
+        'user': '10/minute'
     },
 }
